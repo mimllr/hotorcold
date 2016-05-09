@@ -1,0 +1,64 @@
+h1, h2, h3, h4, h5, p, a {
+  font-family: 'Raleway', sans-serif;
+  line-height: 1.5em;
+}
+
+.button {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #214C58;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.button:hover {
+  background: #FC5A62;
+  text-decoration: none;
+}
+
+#container {
+  text-align: center;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn .5s ease-in 1 forwards;
+}
+
+.fade-out {
+  opacity: 1;
+  animation: fadeOut .5s ease-in 1 forwards;
+}
+
+.is-paused {
+  animation-play-state: paused;
+}
+
+#loading {
+  width: 200px;
+  display: none;
+}
+
+#findLoading {
+  width: 200px;
+}
+
+#text {
+  display: none;
+}

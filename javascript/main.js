@@ -1,50 +1,55 @@
 function getLocation() {
   if (navigator.geolocation) {
+      resetView();
       navigator.geolocation.getCurrentPosition(showPosition);
   } else {
-      console.log("Geolocation is not supported by this browser.");
+    alert("Can't Geolocate. Try again.")
   }
 }
 
 function showPosition(position) {
   lat = position.coords.latitude.toFixed(5);
   lon = position.coords.longitude.toFixed(5);
-  console.log("Latitude: " + lat);
-  console.log("Longitude: " + lon);
   encryptToURL(lat, lon);
 }
 
-function getURL(){
-  console.log(window.location.href);
+function encryptToURL(lat, lon) {
+  fadeLoad();
+  var cryptLat = CryptoJS.AES.encrypt(lat.toString(), "Polo");
+  var cryptLon = CryptoJS.AES.encrypt(lon.toString(), "Polo");
+  var urlToSend = "/findme.html?lat=" + cryptLat + "&lon=" + cryptLon;
+  var smsText = "sms://&body=" + urlToSend;
+  
+  var button = document.getElementById('game');
+  button.href = smsText;
+  fadeButtonIn();
 }
 
-function playGame() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(encryptToURL());
-  } else {
-    alert("Can't Geolocate.");
+function fadeLoad() {
+  var el = document.querySelector('#loading');
+  if (el.classList.contains('is-paused')){
+    el.classList.remove('is-paused');
+    el.style.display = "none";
   }
 }
 
-function encryptToURL(lat, lon) {
-  cryptLat = CryptoJS.AES.encrypt(lat.toString(), "Polo");
-  cryptLon = CryptoJS.AES.encrypt(lon.toString(), "Polo");
-  console.log("Encrypted Lat: " + cryptLat);
-  console.log("Encrypted Lon: " + cryptLon);
+function resetView() {
+  document.getElementById('loading').style.display = "inline";
 
-  urlToSend = "http://localhost:9090/findme.html?lat=" + cryptLat + "&lon=" + cryptLon;
-  console.log(urlToSend);
+  var btn = document.getElementById('game');
+  btn.style.display = 'none';
+  btn.innerHTML = 'Text Your Friends'
+  btn.removeAttribute('onclick');
+  btn.classList.add('is-paused');
+  btn.classList.add('fade-in');
 }
 
-// http://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
-function distance(lat1, lon1, lat2, lon2) {
-  var p = 0.017453292519943295;
-  var c = Math.cos;
-  var a = 0.5 - c((lat2 - lat1) * p)/2 + 
-          c(lat1 * p) * c(lat2 * p) * 
-          (1 - c((lon2 - lon1) * p))/2;
-
-  return 12742 * Math.asin(Math.sqrt(a));
+function fadeButtonIn() {
+  var el = document.querySelector('#game');
+  if (el.classList.contains('is-paused')){
+    el.classList.remove('is-paused');
+    el.style.display = 'inline';
+  }
 }
 
 console.log('main.js loaded.');
