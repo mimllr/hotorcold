@@ -3,6 +3,10 @@ h1, h2, h3, h4, h5, p, a {
   line-height: 1.5em;
 }
 
+#color {
+  background-color: #fff;
+}
+
 .button {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -18,10 +22,6 @@ h1, h2, h3, h4, h5, p, a {
 .button:hover {
   background: #FC5A62;
   text-decoration: none;
-}
-
-#container {
-  text-align: center;
 }
 
 @keyframes fadeOut {
@@ -50,15 +50,27 @@ h1, h2, h3, h4, h5, p, a {
   animation-play-state: paused;
 }
 
+#container {
+  text-align: center;
+  max-width: 100%;
+  margin: 20vh auto;
+}
+
 #loading {
   width: 200px;
   display: none;
 }
 
 #findLoading {
-  width: 200px;
+  width: 75%;
+  max-width: 400px;
 }
 
 #text {
   display: none;
+}
+
+#distance {
+  color: #000;
+  font-size: 5vh;
 }

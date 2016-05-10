@@ -22,6 +22,7 @@ function encryptToURL(lat, lon) {
   
   var button = document.getElementById('game');
   button.href = smsText;
+  document.getElementById('test').innerHTML = urlToSend;
   fadeButtonIn();
 }
 
