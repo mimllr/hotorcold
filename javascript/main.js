@@ -50,7 +50,7 @@ function encryptURL() {
   var lon = window.gameData.position[1];
   var cryptLat = CryptoJS.AES.encrypt(lat.toString(), "Polo");
   var cryptLon = CryptoJS.AES.encrypt(lon.toString(), "Polo");
-  var urlToSend = 'https://' + 'cryptopolo.netlify.com' + "/findme.html?lat=" + cryptLat + "&lon=" + cryptLon;
+  var urlToSend = 'https://' + window.location.hostname + "/findme.html?lat=" + cryptLat + "&lon=" + cryptLon;
   setBitLink(urlToSend);
 }
 
@@ -63,7 +63,6 @@ function setBitLink(encryptedURL) {
   axios.get(url)
     .then(function (response) {
       let bitlyData = response.data.data;
-      console.log(bitlyData);
       fadeButtonIn(bitlyData.url);
     });
 }
