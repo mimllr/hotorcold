@@ -18,7 +18,7 @@ function encryptToURL(lat, lon) {
   var cryptLat = CryptoJS.AES.encrypt(lat.toString(), "Polo");
   var cryptLon = CryptoJS.AES.encrypt(lon.toString(), "Polo");
   var urlToSend = window.location.hostname + "/findme.html?lat=" + cryptLat + "&lon=" + cryptLon;
-  var smsText = "sms://&body=" + urlToSend;
+  var smsText = "sms://?body=" + urlToSend;
 
   var button = document.getElementById('game');
   button.href = smsText;
